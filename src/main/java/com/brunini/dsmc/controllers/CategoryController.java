@@ -22,6 +22,6 @@ public class CategoryController {
 		
 		Category obj  = service.findById(id);			
 		return ResponseEntity.ok().body(obj);
-		
 	}
+	
 }
