@@ -1,14 +1,19 @@
 package com.brunini.dsmc.model.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tb_categories")
 public class Category implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -17,6 +22,9 @@ public class Category implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	
+	@ManyToMany(mappedBy="categories")
+	private List<Product> products = new ArrayList<>();
 		
 	public Category() {
 	}
@@ -41,7 +49,11 @@ public class Category implements Serializable {
 	public void setname(String name) {
 		this.name = name;
 	}
-
+	
+	public List<Product> getProducts() {
+		return products;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -58,7 +70,7 @@ public class Category implements Serializable {
 		Category other = (Category) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 	
 
 }
